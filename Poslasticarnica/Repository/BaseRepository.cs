@@ -67,7 +67,7 @@ namespace Poslasticarnica.Repository
         }
         public virtual IEnumerable<TEntity> GetAll()
         {
-            return _context.Set<TEntity>().Where(x:TEntity=>!(x as Entity).Deleted).ToList();
+            return _context.Set<TEntity>().Where(x: TEntity => !(x as Entity).Deleted).ToList();
         }
 
         public virtual IEnumerable <TEntity> Search(string term="")

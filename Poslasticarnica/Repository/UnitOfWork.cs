@@ -34,7 +34,7 @@ namespace Poslasticarnica.Repository
         public IIsporuka Isporuka { get; set; }
         public IPlacanje Placanje {get; set;}
 
-        public IBaseRepository<TEntity> GetRepository<TEntity> where TEntity : class
+        public IBaseRepository<TEntity> GetRepository<TEntity>() where TEntity : class
         {
             if(_repositories==null)
             {
@@ -50,7 +50,7 @@ namespace Poslasticarnica.Repository
             }
 
             Type repositoryType = typeof(BaseRepository<>);
-            _repositories.Add(type, Activator.CreationInstance(repositoryType.MakeGenericType(typeof(TEntity)), _context));
+            _repositories.Add(type, Activator.CreateInstance(repositoryType.MakeGenericType(typeof(TEntity)), _context));
             return (IBaseRepository<TEntity>)_repositories[type];
         }
 

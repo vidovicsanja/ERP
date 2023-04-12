@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.ApplicationModels;
+using Poslasticarnica.Configuration;
+using Poslasticarnica.Model;
+using Poslasticarnica.Repository;
 
 namespace Poslasticarnica.Service
 {
@@ -7,7 +10,7 @@ namespace Poslasticarnica.Service
         protected readonly ProjectConfiguration _configuration;
         protected readonly ILogger _logger;
 
-        public Service BaseService()
+        public BaseService()
         {
 
 
@@ -17,7 +20,7 @@ namespace Poslasticarnica.Service
             _configuration = configuraton;
         }
 
-        public BaseService(ProjectConfiguration configuration, ILogger logger configuration, ILogger<BaseService<TEntity>> logger)
+        public BaseService(ProjectConfiguration configuration, ILogger<BaseService<TEntity>> logger)
         {
             _configuration = configuration;
             _logger = logger;
@@ -27,7 +30,7 @@ namespace Poslasticarnica.Service
             try
             {
                 using UnitOfWork unitOfWork = new(new ApplicationContext());
-                TEntity entity = unitOfWork.GetRepository<TEntity>.Get(Id);
+                TEntity entity = unitOfWork.GetRepository<TEntity>().Get(Id);
 
                 return entity;
             }
@@ -74,7 +77,7 @@ namespace Poslasticarnica.Service
             }
             catch(Exception e)
             {
-                _logger.LogError(message: $"Error in BaseService in Update Method {e.Message} in {e.StackTrace}");
+                _logger.LogError($"Error in BaseService in Update Method {e.Message} in {e.StackTrace}");
                 return false;
             }
         }
@@ -86,7 +89,7 @@ namespace Poslasticarnica.Service
                 using UnitOfWork unitOfWork = new(new ApplicationContext());
                 TEntity entity = unitOfWork.GetRepository<TEntity>().Get(Id);
 
-                (entity as Entity).Delete = true;
+                (entity as Entity).Deleted = true;
 
                 unitOfWork.GetRepository<TEntity>().Update(entity);
                 _ = unitOfWork.Complete();
@@ -95,7 +98,7 @@ namespace Poslasticarnica.Service
             }
             catch(Exception e)
             {
-                _logger.LogError(message: $"Error in BaseService in Delete Method {e.Message} in {e.SatckTrace}");
+                _logger.LogError(message: $"Error in BaseService in Delete Method {e.Message} in {e.StackTrace}");
                 return false;
             }
         }
