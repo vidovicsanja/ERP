@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.EntityFrameworkCore;
 using Poslasticarnica.Core;
 using Poslasticarnica.Model;
 using System.Linq.Expressions;
@@ -42,7 +43,7 @@ namespace Poslasticarnica.Repository
 
         public virtual void AddRange(IEnumerable<TEntity> entities)
         {
-            _context.Set<TEntity>.AddRRange(entities);
+            _context.Set<TEntity>().AddRange(entities);
         }
         
         public virtual void Remove(TEntity entity)
@@ -60,7 +61,7 @@ namespace Poslasticarnica.Repository
             _context.Set <TEntity>().Attach(entity);
             _context.Entry(entity).State = EntityState.Modified;
         }
-        public virtual Detach(TEntity entity)
+        public virtual void Detach(TEntity entity)
         {
             _context.Entry(entity).State = EntityState.Detached;
         }
@@ -73,7 +74,6 @@ namespace Poslasticarnica.Repository
         {
             throw new NotImplementedException();
         }
-
     }
 
 }
