@@ -5,5 +5,6 @@ namespace Poslasticarnica.Service
 {
     public class SastojakProizvodaService : BaseService<SastojakProizvoda>, ISastojakProizvodaService
     {
+
     }
 }

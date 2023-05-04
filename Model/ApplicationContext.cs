@@ -28,8 +28,8 @@ namespace Poslasticarnica.Model
         public DbSet<Korisnik> Korisnik { get; set; }
         public DbSet<KategorijaProizvoda> KategorijaProizvoda { get; set; }
         public DbSet<Proizvod> Proizvod { get; set; }
-        public DbSet<Porudzbina> Porudzbina { get; set; }
-        public DbSet<StavkaPorudzbine> StavkaPorudzbine { get; set; }
+        public DbSet<KorisnikController> Porudzbina { get; set; }
+        public DbSet<StavkaPorudzbineController> StavkaPorudzbine { get; set; }
 
         public DbSet<Sastojak> Sastojak { get; set; }
         public DbSet<SastojakProizvoda> SastojakProizvoda { get; set; }

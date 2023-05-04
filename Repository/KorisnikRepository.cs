@@ -2,6 +2,7 @@
 using Poslasticarnica.Core;
 using Poslasticarnica.Model;
 
+
 namespace Poslasticarnica.Repository
 {
     public class KorisnikRepository : BaseRepository<Korisnik>, IKorisnik
@@ -14,5 +15,9 @@ namespace Poslasticarnica.Repository
         {
             return ApplicationContext.Korisnik.Where(x => x.Email == email).FirstOrDefault();
         }
+
+
+
+
     }
 }

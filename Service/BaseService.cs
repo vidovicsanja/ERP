@@ -52,7 +52,7 @@ namespace Poslasticarnica.Service
             }
             catch(Exception e)
             {
-                _logger.LogError(message: $"Error in BaseService in Get Method {e.Message} in {e.StackTrace}");
+                _logger.LogError($"Error in BaseService in Get Method {e.Message} in {e.StackTrace}");
                 return null;
             }
         }
@@ -70,7 +70,7 @@ namespace Poslasticarnica.Service
             }
             catch(Exception e)
             {
-                _logger.LogError(message: $"Error in BaseService in Add Method{e.Message} in {e.StackTrace}");
+                _logger.LogError($"Error in BaseService in Add Method{e.Message} in {e.StackTrace}");
                 return null;
             }
         }
@@ -114,7 +114,7 @@ namespace Poslasticarnica.Service
             }
             catch(Exception e)
             {
-                _logger.LogError(message: $"Error in BaseService in Delete Method {e.Message} in {e.StackTrace}");
+                _logger.LogError($"Error in BaseService in Delete Method {e.Message} in {e.StackTrace}");
                 return false;
             }
         }

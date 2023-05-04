@@ -15,5 +15,6 @@ namespace Poslasticarnica.Repository
             return ApplicationContext.Proizvod.Where
                 (x => x.NazivProizvoda.ToLower() == name.ToLower()).ToList();
         }
+
     }
 }

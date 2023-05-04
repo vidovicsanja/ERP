@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Poslasticarnica.Configuration;
 using Poslasticarnica.Core;
@@ -27,6 +28,7 @@ namespace Poslasticarnica.Controllers
 
         }
 
+        [Authorize(Roles = "Kupac, Prodavac")]
         [HttpGet("{Id}")]
         public virtual IActionResult Get(int Id)
         {
@@ -39,12 +41,14 @@ namespace Poslasticarnica.Controllers
             return Ok(entity);
         }
 
+        [Authorize(Roles = "Kupac, Prodavac")]
         [HttpGet("all")]
         public virtual IActionResult GetAll()
         {
             return Ok(_baseService.GetAll());
         }
 
+        [Authorize(Roles = "Prodavac")]
         [HttpPost]
         public virtual IActionResult Add(TEntity entity)
         {
@@ -58,8 +62,9 @@ namespace Poslasticarnica.Controllers
             return Ok(response);
         }
 
+        [Authorize(Roles = "Prodavac")]
         [HttpPut("{Id}")]
-        public IActionResult Update(int Id, TEntity entity)
+        public virtual IActionResult Update(int Id, TEntity entity)
         {
             if (entity == null)
             {
@@ -70,6 +75,9 @@ namespace Poslasticarnica.Controllers
             return Ok(response);
         }
 
+
+
+        [Authorize(Roles ="Prodavac")]
         [HttpDelete("{Id}")]
         public virtual IActionResult Delete(int Id)
         {
@@ -84,6 +92,8 @@ namespace Poslasticarnica.Controllers
 
             return _userService.GetCurrentUser(email);
         }
+
+
 
     }
 }

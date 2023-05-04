@@ -1,4 +1,5 @@
 ﻿using Poslasticarnica.Model;
+using Poslasticarnica.Model.dto;
 using Poslasticarnica.Repository;
 
 namespace Poslasticarnica.Core
@@ -7,7 +8,8 @@ namespace Poslasticarnica.Core
     {
         Korisnik GetCurrentUser(string email);
 
-        public Korisnik Register(Korisnik korisnik);
+        public Korisnik Register(RegistrationDTO korisnik);
+        public Korisnik AddSeller(RegistrationDTO korisnik);
     }
 
 

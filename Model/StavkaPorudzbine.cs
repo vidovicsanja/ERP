@@ -1,6 +1,6 @@
 ﻿namespace Poslasticarnica.Model
 {
-    public class StavkaPorudzbine:Entity
+    public class StavkaPorudzbineController:Entity
     {
         public int Kolicina { get; set; }
         public string Mera { get; set; }

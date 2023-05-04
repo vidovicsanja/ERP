@@ -2,7 +2,7 @@
 
 namespace Poslasticarnica.Model
 {
-    public class Porudzbina : Entity
+    public class KorisnikController : Entity
     {
 
         public DateTime DatumVremePorudzbine { get; set; }

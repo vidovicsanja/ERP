@@ -2,7 +2,7 @@
 
 namespace Poslasticarnica.Core
 {
-    public interface IStavkaPorudzbine:IBaseRepository<StavkaPorudzbine>
+    public interface IStavkaPorudzbine:IBaseRepository<StavkaPorudzbineController>
     {
     }
 }

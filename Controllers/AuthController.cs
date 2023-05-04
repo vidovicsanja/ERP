@@ -45,7 +45,8 @@ namespace Poslasticarnica.Controllers
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
                 new Claim("Id", korisnik.Id.ToString()),
-                new Claim("Email", korisnik.Email)
+                new Claim("Email", korisnik.Email),
+                new Claim(ClaimTypes.Role, korisnik.Uloga)
             };
             SymmetricSecurityKey key = new(Encoding.UTF8.GetBytes(_configuration.Jwt.Key));
             SigningCredentials signIn = new(key, SecurityAlgorithms.HmacSha256);

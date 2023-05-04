@@ -2,7 +2,7 @@
 
 namespace Poslasticarnica.Core
 {
-    public interface IPorudzbina:IBaseRepository<Porudzbina>
+    public interface IPorudzbina:IBaseRepository<KorisnikController>
     {
     }
 }
