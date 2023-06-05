@@ -1,8 +1,21 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import { getProizvodi, onClick} from "../services/ProizvodiServis";
 
 const Proizvodi=()=>{
 
   const [data,setData] = useState([])
+
+
+  useEffect(() => {
+    fetchData(1, 5)
+  }, [])
+
+  const fetchData = (page, perPage) => {
+    getProizvodi(page, perPage).then(response => {
+      setData(response || [])
+    })
+  }
+
 
   const renderProizvodi = () => {
 
@@ -11,7 +24,7 @@ const Proizvodi=()=>{
     for(let item of data) {
       result.push(<tr>
         <td>{item.id}</td>
-        <td>{item.naziv}</td>
+        <td>{item.nazivProizvoda}</td>
         <td>{item.cena}</td>
         <td>{item.opis}</td>
         <td>{item.idkp}</td>
@@ -40,7 +53,30 @@ const Proizvodi=()=>{
   </tbody>
 </table>
 
-    </div>
+<button onClick={() => fetchData(1, 5)}>
+  1
+</button>
+
+<button onClick={() => fetchData(2, 5)}>
+  2
+</button>
+
+<button onClick={() => fetchData(3, 5)}>
+  3
+</button>
+
+<button onClick={() => fetchData(4, 5)}>
+  4
+</button>
+
+<button onClick={() => fetchData(5, 5)}>
+  5
+</button>
+
+
+</div>
+
 }
 
 export default Proizvodi
+

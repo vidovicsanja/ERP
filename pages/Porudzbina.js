@@ -1,8 +1,17 @@
-import {useState} from "react"
+import {useEffect, useState} from "react";
+import {getPorudzbina} from '../services/PorudzbinaServis';
 
 const Porudzbina=()=>{
 
   const [data,setData] = useState([])
+
+  useEffect(() => {
+    getPorudzbina().then(response => {
+      console.log(response)
+
+      setData(response || [])
+    })
+  }, [])
 
   const renderPorudzbina = () => {
 

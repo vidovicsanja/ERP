@@ -1,9 +1,21 @@
-import {useState} from 'react'
+import {useEffect, useState} from "react";
+import { getSastojci } from "../services/SastojciService";
 
 const Sastojci=()=>{
 
 
   const [data,setData] = useState([])
+
+  useEffect(() =>{
+    fetchData(1, 5)
+  }, [])
+
+  const fetchData = (page, perPage) => {
+    getSastojci(page, perPage).then(response => {
+      setData(response || [])
+    })
+  }
+
 
   const renderSastojci = () => {
 
@@ -36,6 +48,26 @@ const Sastojci=()=>{
    {renderSastojci()}
   </tbody>
 </table>
+
+<button onClick={() => fetchData(1, 5)}>
+  1
+</button>
+
+<button onClick={() => fetchData(2, 5)}>
+  2
+</button>
+
+<button onClick={() => fetchData(3, 5)}>
+  3
+</button>
+
+<button onClick={() => fetchData(4, 5)}>
+  4
+</button>
+
+<button onClick={() => fetchData(5, 5)}>
+  5
+</button>
 
     </div>
 }

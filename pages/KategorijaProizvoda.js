@@ -1,8 +1,18 @@
-import {useState} from "react"
+import {useEffect, useState} from "react";
+import {getKategorije} from '../services/KategorijaServis';
 
 const KategorijaProizvoda = () => {
 
   const [data,setData] = useState([])
+
+
+  useEffect(() => {
+    getKategorije().then(response => {
+      console.log(response)
+
+      setData(response || [])
+    })
+  }, [])
 
   const renderKategorijaProizvoda = () => {
 
@@ -10,8 +20,8 @@ const KategorijaProizvoda = () => {
 
     for(let item of data) {
       result.push(<tr>
-        <td>{item.ID}</td>
-        <td>{item.NazivLKategorije}</td>
+        <td>{item.id}</td>
+        <td>{item.nazivKategorije}</td>
 
 
       </tr>)
@@ -21,7 +31,7 @@ const KategorijaProizvoda = () => {
   }
 
     return <div>
-        <h1>KategorijaProizvoda</h1>
+        <h1>Kategorije Proizvoda</h1>
 
         <table class="table">
   <thead>

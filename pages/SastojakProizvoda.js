@@ -1,8 +1,18 @@
-import {useState} from "react"
+import {useEffect,useState} from "react";
+import { getSastojciProizvoda } from "../services/SastojakProizvodaServis";
+
 
 const SastojakProizvoda=()=>{
 
   const [data,setData] = useState([])
+
+  useEffect(() => {
+    getSastojciProizvoda().then(response => {
+      console.log(response)
+
+      setData(response || [])
+    })
+  }, [])
 
   const renderSastojakProizvoda = () => {
 
@@ -10,11 +20,11 @@ const SastojakProizvoda=()=>{
 
     for(let item of data) {
       result.push(<tr>
-        <td>{item.ID}</td>
-        <td>{item.KolicinaSastojka}</td>
-        <td>{item.MeraSastojka}</td>
-        <td>{item.SID}</td>
-        <td>{item.PROIZID}</td>
+        <td>{item.id}</td>
+        <td>{item.kolicinaSastojka}</td>
+        <td>{item.meraSastojka}</td>
+        <td>{item.prid}</td>
+        <td>{item.sid}</td>
 
       </tr>)
     }
