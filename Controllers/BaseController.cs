@@ -43,12 +43,12 @@ namespace Poslasticarnica.Controllers
 
         [Authorize(Roles = "Kupac, Prodavac")]
         [HttpGet("all")]
-        public virtual IActionResult GetAll()
+        public virtual IActionResult GetAll([FromQuery] int page, [FromQuery] int perPage, [FromQuery] string? sort, [FromQuery] string? direction)
         {
-            return Ok(_baseService.GetAll());
+            return Ok(_baseService.GetAll(page, perPage, sort, direction));
         }
 
-        [Authorize(Roles = "Prodavac")]
+        [Authorize(Roles = "Prodavac, Kupac")]
         [HttpPost]
         public virtual IActionResult Add(TEntity entity)
         {

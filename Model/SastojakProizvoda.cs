@@ -5,9 +5,9 @@
         public int KolicinaSastojka { get; set; }
         public string MeraSastojka { get; set; }
 
-        public long? SID { get; set; }
+        public long? PRID{ get; set; }
 
-        public long? PROIZID { get; set; }
+        public long? SID { get; set; }
 
 
 

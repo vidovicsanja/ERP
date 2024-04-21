@@ -8,7 +8,7 @@ namespace Poslasticarnica.Core
         TEntity Get (long Id);
     IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
 
-        IEnumerable<TEntity> GetAll();
+        IEnumerable<TEntity> GetAll(int page, int perPage, string sort, string direction);
 
         IEnumerable<TEntity> Search(string term = "");
 

@@ -17,7 +17,15 @@ namespace Poslasticarnica.Controllers
 
         }
 
+
         [Authorize(Roles = "Prodavac")]
+        [HttpGet("all")]
+        public override IActionResult GetAll([FromQuery] int page, [FromQuery] int perPage, [FromQuery] string sort, [FromQuery] string direction)
+        {
+            return Ok(_baseService.GetAll(page, perPage, sort, direction));
+        }
+
+        [Authorize(Roles = "Kupac")]
         [HttpPost]
         public override IActionResult Add(Model.StavkaPorudzbineController entity)
         {
@@ -31,7 +39,7 @@ namespace Poslasticarnica.Controllers
             return Ok(response);
         }
 
-        [Authorize(Roles = "Kupac, Prodavac")]
+        [Authorize(Roles = "Kupac")]
         [HttpPut("{Id}")]
         public override IActionResult Update(int Id, Model.StavkaPorudzbineController entity)
         {
@@ -44,7 +52,7 @@ namespace Poslasticarnica.Controllers
             return Ok(response);
         }
 
-        [Authorize(Roles = "Kupac, Prodavac")]
+        [Authorize(Roles = "Kupac")]
         [HttpDelete("{Id}")]
         public override IActionResult Delete(int Id)
         {
@@ -53,7 +61,7 @@ namespace Poslasticarnica.Controllers
             return Ok(response);
         }
 
-
+        [Authorize(Roles ="Kupac")]
         [HttpGet("byKorisnik/{korisnikId}")]
         public override IActionResult Get(int Id)
 

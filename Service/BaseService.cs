@@ -27,13 +27,13 @@ namespace Poslasticarnica.Service
             _logger = logger;
         }
 
-        public virtual IEnumerable<TEntity> GetAll() 
+        public virtual IEnumerable<TEntity> GetAll(int page, int perPage, string sort, string direction) 
         {
             try
             {
                 using UnitOfWork unitOfWork = new(new ApplicationContext());
                
-                return unitOfWork.GetRepository<TEntity>().GetAll();
+                return unitOfWork.GetRepository<TEntity>().GetAll(page, perPage, sort, direction);
             }
             catch (Exception e)
             {

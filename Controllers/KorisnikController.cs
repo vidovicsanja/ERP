@@ -22,9 +22,18 @@ namespace Poslasticarnica.Controllers
 
         [Authorize(Roles = "Prodavac")]
         [HttpGet("all")]
-        public override IActionResult GetAll()
+        public override IActionResult GetAll([FromQuery] int page, [FromQuery] int perPage, [FromQuery] string sort, [FromQuery] string direction)
         {
-            return Ok(_baseService.GetAll());
+            return Ok(_baseService.GetAll(page, perPage, sort, direction));
+        }
+
+
+        [HttpGet("current")]
+        public  IActionResult GetCurrentAction() 
+        {
+            Korisnik korisnik = GetCurrentUser();
+
+            return Ok(korisnik);
         }
 
 
@@ -84,8 +93,24 @@ namespace Poslasticarnica.Controllers
         }
 
 
+        //brisanje samo svojih podataka
+        [Authorize(Roles = "Kupac, Prodavac")]
+        [HttpDelete("{Id}")]
+        public virtual IActionResult Delete(int Id)
+        {
+            /*
+            Korisnik korisnik = GetCurrentUser();
 
+            if (korisnik is not null && korisnik.Id != Id)
+            {
+                return BadRequest();
+            }
+            */
 
+            bool response = _baseService.Delete(Id);
+
+            return Ok(response);
+        }
 
 
 

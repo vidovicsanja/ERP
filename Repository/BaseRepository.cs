@@ -3,8 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Poslasticarnica.Core;
 using Poslasticarnica.Model;
 using System.Linq.Expressions;
-using System.Security.Cryptography.Xml;
-using System.Xml.Serialization;
+using System.Linq.Dynamic.Core;
 
 namespace Poslasticarnica.Repository
 {
@@ -65,10 +64,21 @@ namespace Poslasticarnica.Repository
         {
             _context.Entry(entity).State = EntityState.Detached;
         }
-        public virtual IEnumerable<TEntity> GetAll()
+        public virtual IEnumerable<TEntity> GetAll(int page, int perPage, string sort, string direction)
         {
-            return _context.Set<TEntity>().Where( x => !(x as Entity).Deleted).ToList();
+            IQueryable<TEntity> query = _context.Set<TEntity>().Where(x => !(x as Entity).Deleted)
+                .Skip((page - 1) * perPage)
+                .Take(perPage);
+
+
+            if (sort != null && direction != null) 
+            {
+                return query.OrderBy(sort + " " + direction).ToList();
+            }
+
+            return query.ToList();
         }
+
 
         public virtual IEnumerable <TEntity> Search(string term="")
         {

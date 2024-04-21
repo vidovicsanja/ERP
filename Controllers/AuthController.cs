@@ -50,9 +50,11 @@ namespace Poslasticarnica.Controllers
             };
             SymmetricSecurityKey key = new(Encoding.UTF8.GetBytes(_configuration.Jwt.Key));
             SigningCredentials signIn = new(key, SecurityAlgorithms.HmacSha256);
-            JwtSecurityToken token = new(_configuration.Jwt.Issuer, _configuration.Jwt.Audience, claims, expires: DateTime.UtcNow.AddDays(1), signingCredentials: signIn);
+            JwtSecurityToken token = new(_configuration.Jwt.Issuer, _configuration.Jwt.Audience, 
+                claims, expires: DateTime.UtcNow.AddDays(1), signingCredentials: signIn);
 
-            return Ok(new JwtSecurityTokenHandler().WriteToken(token));
+            return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
+
 
         }
 
